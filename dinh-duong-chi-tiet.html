@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dinh Dưỡng Hữu Cơ - UrbanGarden</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header class="header">
+        <div class="logo">
+            <i class="fa-solid fa-seedling"></i>
+            <span>UrbanGarden</span>
+        </div>
+        <nav class="nav">
+            <a href="index.html"><i class="fa-solid fa-house"></i> Tổng quan</a>
+            <a href="vuon-cua-toi.html"><i class="fa-solid fa-plant-wilt"></i> Vườn của tôi</a>
+            <a href="lich-cham-soc.html"><i class="fa-solid fa-calendar-days"></i> Lịch chăm sóc</a>
+            <a href="cam-nang.html" class="active"><i class="fa-solid fa-book-open"></i> Cẩm nang</a>
+        </nav>
+        <div class="user-profile">
+            <!-- Biểu tượng thông báo & bảng sổ xuống -->
+            <div class="notification-wrapper">
+                <div class="notification-icon" id="notifBtn" title="Thông báo & Nhắc hẹn">
+                    <i class="fa-solid fa-bell"></i>
+                    <span class="notification-badge">2</span>
+                </div>
+
+                <!-- Bảng thông báo & Đặt nhắc hẹn -->
+                <div class="notification-dropdown" id="notifDropdown">
+                    <div class="dropdown-header">
+                        <h3><i class="fa-solid fa-bell"></i> Thông Báo & Nhắc Hẹn</h3>
+                    </div>
+                    
+                    <!-- Form đặt nhắc hẹn nhanh -->
+                    <div class="reminder-form">
+                        <h4><i class="fa-solid fa-clock"></i> Đặt nhắc hẹn mới</h4>
+                        <div class="form-group-sm">
+                            <input type="text" id="remindTitle" placeholder="Nội dung (VD: Tưới cây ớt)...">
+                        </div>
+                        <div class="form-group-sm">
+                            <input type="datetime-local" id="remindTime">
+                        </div>
+                        <button type="button" class="btn-primary-sm" onclick="addReminder()"><i class="fa-solid fa-plus"></i> Đặt nhắc hẹn</button>
+                    </div>
+
+                    <div class="dropdown-divider"></div>
+
+                    <!-- Danh sách thông báo -->
+                    <div class="notification-list" id="notifList">
+                        <div class="notif-item unread">
+                            <i class="fa-solid fa-droplet text-blue"></i>
+                            <div>
+                                <p><strong>Đã đến giờ tưới nước</strong> cho Giàn xà lách thủy canh.</p>
+                                <span class="notif-time">10 phút trước</span>
+                            </div>
+                        </div>
+                        <div class="notif-item">
+                            <i class="fa-solid fa-seedling text-green"></i>
+                            <div>
+                                <p><strong>Lịch bón phân</strong> Cà chua bi vào sáng mai.</p>
+                                <span class="notif-time">Hôm qua</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Nút Đăng nhập -->
+            <a href="dang-nhap.html" class="btn-login"><i class="fa-solid fa-user"></i> Đăng nhập</a>
+        </div>
+    </header>
+
+    <main class="main-container">
+        <section class="page-header-section">
+            <a href="cam-nang.html" class="btn-outline" style="text-decoration: none;"><i class="fa-solid fa-arrow-left"></i> Quay lại cẩm nang</a>
+        </section>
+
+        <article class="card" style="max-width: 850px; margin: 0 auto; padding: 2rem;">
+            <span class="location-tag">Dinh dưỡng hữu cơ</span>
+            <h1 style="font-size: 1.8rem; margin: 10px 0; color: #1b5e20;">Cách ủ phân compost từ rác thải bếp đơn giản tại nhà</h1>
+            <p style="color: #888; font-size: 0.85rem; margin-bottom: 1.5rem;"><i class="fa-regular fa-clock"></i> Đọc 4 phút • 1 tuần trước • Tác giả: Đội ngũ Kỹ sư UrbanGarden</p>
+
+            <img src="https://images.unsplash.com/photo-1592841200221-a6898f307baa?auto=format&fit=crop&w=800&q=80" alt="Dinh dưỡng hữu cơ" style="width: 100%; height: 320px; object-fit: cover; border-radius: 8px; margin-bottom: 1.5rem;">
+
+            <div style="line-height: 1.8; color: #444; font-size: 1rem;">
+                <p style="margin-bottom: 1rem;">Ủ rác bếp làm phân hữu cơ không chỉ giảm lượng rác thải ra môi trường mà còn đem lại nguồn dinh dưỡng dồi dào, cân bằng cho đất trồng rau đô thị.</p>
+                
+                <h3 style="color: #2e7d32; margin: 1.2rem 0 0.5rem 0;">1. Phân loại rác hữu cơ</h3>
+                <ul style="margin-left: 1.5rem; margin-bottom: 1rem;">
+                    <li><strong>Rác xanh (giàu Đạm):</strong> Vỏ trái cây, rau thừa, bã trà, bã cà phê.</li>
+                    <li><strong>Rác nâu (giàu Cacbon):</strong> Lá khô, giấy bìa carton xé nhỏ, mùn cưa.</li>
+                </ul>
+
+                <h3 style="color: #2e7d32; margin: 1.2rem 0 0.5rem 0;">2. Quy trình ủ phân trong thùng</h3>
+                <p style="margin-bottom: 1rem;">Rải một lớp rác nâu dày khoảng 5cm ở đáy thùng có đục lỗ thoát nước, sau đó rải lớp rác xanh lên trên. Bổ sung nấm đối kháng Trichoderma để đẩy nhanh quá trình phân hủy và triệt tiêu mùi hôi.</p>
+
+                <h3 style="color: #2e7d32; margin: 1.2rem 0 0.5rem 0;">3. Thu hoạch và sử dụng</h3>
+                <p style="margin-bottom: 1rem;">Sau 30 - 45 ngày, hỗn hợp rác sẽ tơi xốp, có màu nâu đen và mùi đất tự nhiên. Bạn có thể trộn trực tiếp phân này vào đất trồng với tỷ lệ 20 - 30% để bón lót hoặc bón thúc cho cây.</p>
+            </div>
+        </article>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>

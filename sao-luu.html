@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sao Lưu & Khôi Phục Dữ Liệu - UrbanGarden</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header class="header">
+        <div class="logo">
+            <i class="fa-solid fa-seedling"></i>
+            <span>UrbanGarden</span>
+        </div>
+        <nav class="nav">
+            <a href="index.html"><i class="fa-solid fa-house"></i> Tổng quan</a>
+            <a href="vuon-cua-toi.html"><i class="fa-solid fa-plant-wilt"></i> Vườn của tôi</a>
+            <a href="lich-cham-soc.html"><i class="fa-solid fa-calendar-days"></i> Lịch chăm sóc</a>
+            <a href="cam-nang.html"><i class="fa-solid fa-book-open"></i> Cẩm nang</a>
+            <a href="sao-luu.html" class="active"><i class="fa-solid fa-database"></i> Sao lưu</a>
+        </nav>
+        <div class="user-profile">
+            <a href="dang-nhap.html" class="btn-login"><i class="fa-solid fa-user"></i> Đăng nhập</a>
+        </div>
+    </header>
+
+    <main class="main-container">
+        <section class="page-header-section">
+            <div>
+                <h1>💾 Sao Lưu & Khôi Phục Dữ Liệu Tài Khoản</h1>
+                <p>Đảm bảo dữ liệu chậu cây và lịch chăm sóc của bạn không bị mất ở các phiên truy cập tiếp theo.</p>
+            </div>
+        </section>
+
+        <div class="dashboard-grid" style="grid-template-columns: 1fr 1fr;">
+            <!-- Phần Xuất Sao Lưu -->
+            <div class="card">
+                <div class="card-header">
+                    <h2><i class="fa-solid fa-cloud-arrow-down text-green"></i> Xuất Sao Lưu Dữ Liệu</h2>
+                </div>
+                <p style="color: #666; font-size: 0.9rem; margin-bottom: 1.5rem;">Tải xuống tệp tin JSON chứa toàn bộ thông tin khu vườn, cây trồng và nhắc hẹn của bạn.</p>
+                <button type="button" class="btn-primary" onclick="exportData()"><i class="fa-solid fa-download"></i> Tải xuống bản sao lưu (.json)</button>
+            </div>
+
+            <!-- Phần Khôi Phục -->
+            <div class="card">
+                <div class="card-header">
+                    <h2><i class="fa-solid fa-cloud-arrow-up text-orange"></i> Khôi Phục Dữ Liệu</h2>
+                </div>
+                <p style="color: #666; font-size: 0.9rem; margin-bottom: 1rem;">Chọn tệp sao lưu đã lưu trước đó trên máy tính để khôi phục lại toàn bộ khu vườn của bạn.</p>
+                <div class="form-group">
+                    <input type="file" id="importFile" accept=".json" style="padding: 6px; border: 1px solid #ddd; border-radius: 6px; width: 100%;">
+                </div>
+                <button type="button" class="btn-outline" onclick="importData()"><i class="fa-solid fa-upload"></i> Tải lên & Khôi phục</button>
+            </div>
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>

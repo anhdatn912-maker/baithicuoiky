@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản lý Vườn phố & Nông nghiệp Đô thị</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <header class="header">
+        <div class="logo">
+            <i class="fa-solid fa-seedling"></i>
+            <span>UrbanGarden</span>
+        </div>
+        <nav class="nav">
+            <a href="index.html" class="active"><i class="fa-solid fa-house"></i> Tổng quan</a>
+            <a href="vuon-cua-toi.html"><i class="fa-solid fa-plant-wilt"></i> Vườn của tôi</a>
+            <a href="lich-cham-soc.html"><i class="fa-solid fa-calendar-days"></i> Lịch chăm sóc</a>
+            <a href="cam-nang.html"><i class="fa-solid fa-book-open"></i> Cẩm nang</a>
+        </nav>
+        <div class="user-profile">
+            <!-- Biểu tượng thông báo & bảng sổ xuống -->
+            <div class="notification-wrapper">
+                <div class="notification-icon" id="notifBtn" title="Thông báo & Nhắc hẹn">
+                    <i class="fa-solid fa-bell"></i>
+                    <span class="notification-badge">2</span>
+                </div>
+
+                <!-- Bảng thông báo & Đặt nhắc hẹn -->
+                <div class="notification-dropdown" id="notifDropdown">
+                    <div class="dropdown-header">
+                        <h3><i class="fa-solid fa-bell"></i> Thông Báo & Nhắc Hẹn</h3>
+                    </div>
+                    
+                    <!-- Form đặt nhắc hẹn nhanh -->
+                    <div class="reminder-form">
+                        <h4><i class="fa-solid fa-clock"></i> Đặt nhắc hẹn mới</h4>
+                        <div class="form-group-sm">
+                            <input type="text" id="remindTitle" placeholder="Nội dung (VD: Tưới cây ớt)...">
+                        </div>
+                        <div class="form-group-sm">
+                            <input type="datetime-local" id="remindTime">
+                        </div>
+                        <button type="button" class="btn-primary-sm" onclick="addReminder()"><i class="fa-solid fa-plus"></i> Đặt nhắc hẹn</button>
+                    </div>
+
+                    <div class="dropdown-divider"></div>
+
+                    <!-- Danh sách thông báo -->
+                    <div class="notification-list" id="notifList">
+                        <div class="notif-item unread">
+                            <i class="fa-solid fa-droplet text-blue"></i>
+                            <div>
+                                <p><strong>Đã đến giờ tưới nước</strong> cho Giàn xà lách thủy canh.</p>
+                                <span class="notif-time">10 phút trước</span>
+                            </div>
+                        </div>
+                        <div class="notif-item">
+                            <i class="fa-solid fa-seedling text-green"></i>
+                            <div>
+                                <p><strong>Lịch bón phân</strong> Cà chua bi vào sáng mai.</p>
+                                <span class="notif-time">Hôm qua</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Nút Đăng nhập -->
+            <a href="dang-nhap.html" class="btn-login"><i class="fa-solid fa-user"></i> Đăng nhập</a>
+        </div>
+    </header>
+
+    <main class="main-container">
+        
+        <section class="welcome-section">
+            <h1>Chào buổi sáng, Gia chủ Xanh! 🌱</h1>
+            <p>Hôm nay có <strong>2 việc cần làm</strong> cho khu vườn trên sân thượng của bạn.</p>
+        </section>
+
+        <div class="stats-grid">
+            <div class="stat-card">
+                <i class="fa-solid fa-seedling icon-green"></i>
+                <div>
+                    <h3>12</h3>
+                    <p>Cây đang trồng</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <i class="fa-solid fa-triangle-exclamation icon-orange"></i>
+                <div>
+                    <h3>2</h3>
+                    <p>Cần tưới nước hôm nay</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <i class="fa-solid fa-cloud-sun icon-blue"></i>
+                <div>
+                    <h3>32°C</h3>
+                    <p>Thời tiết ban công</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="dashboard-grid">
+            
+            <section class="card schedule-card">
+                <div class="card-header">
+                    <h2><i class="fa-solid fa-clock"></i> Lịch Chăm Sóc Hôm Nay</h2>
+                    <span class="badge">Đang tải thời gian...</span>
+                </div>
+                <ul class="task-list">
+                    <li class="task-item completed">
+                        <input type="checkbox" checked id="task1">
+                        <label for="task1">
+                            <span class="task-title">Bón phân hữu cơ cho Cà chua bi</span>
+                            <span class="task-time">07:00 AM</span>
+                        </label>
+                    </li>
+                    <li class="task-item">
+                        <input type="checkbox" id="task2">
+                        <label for="task2">
+                            <span class="task-title">Tưới nước đợt 2 cho Rau muống thủy canh</span>
+                            <span class="task-time">05:00 PM</span>
+                        </label>
+                    </li>
+                    <li class="task-item">
+                        <input type="checkbox" id="task3">
+                        <label for="task3">
+                            <span class="task-title">Kiểm tra sâu bệnh giàn Xà lách</span>
+                            <span class="task-time">05:30 PM</span>
+                        </label>
+                    </li>
+                </ul>
+            </section>
+
+            <section class="card plants-card">
+                <div class="card-header">
+                    <h2><i class="fa-solid fa-list"></i> Vườn Rau Ban Công</h2>
+                    <a href="them-cay.html" class="btn-primary" style="text-decoration: none;"><i class="fa-solid fa-plus"></i> Thêm cây</a>
+                </div>
+                <div class="plants-grid">
+                    <div class="plant-card">
+                        <img src="https://images.unsplash.com/photo-1592841200221-a6898f307baa?auto=format&fit=crop&w=300&q=80" alt="Cà chua">
+                        <div class="plant-info">
+                            <h3>Cà chua bi</h3>
+                            <p class="plant-status text-green">Đang ra quả • Đất ẩm</p>
+                            <div class="progress-bar"><div class="progress" style="width: 70%;"></div></div>
+                        </div>
+                    </div>
+                    <div class="plant-card">
+                        <img src="https://images.unsplash.com/photo-1550989460-0adf9ea622e2?auto=format&fit=crop&w=300&q=80" alt="Xà lách">
+                        <div class="plant-info">
+                            <h3>Xà lách thủy canh</h3>
+                            <p class="plant-status text-orange">Cần tưới nước</p>
+                            <div class="progress-bar"><div class="progress warning" style="width: 40%;"></div></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lịch Chăm Sóc & Ghi Chú - UrbanGarden</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header class="header">
+        <div class="logo">
+            <i class="fa-solid fa-seedling"></i>
+            <span>UrbanGarden</span>
+        </div>
+        <nav class="nav">
+            <a href="index.html"><i class="fa-solid fa-house"></i> Tổng quan</a>
+            <a href="vuon-cua-toi.html"><i class="fa-solid fa-plant-wilt"></i> Vườn của tôi</a>
+            <a href="lich-cham-soc.html" class="active"><i class="fa-solid fa-calendar-days"></i> Lịch chăm sóc</a>
+            <a href="cam-nang.html"><i class="fa-solid fa-book-open"></i> Cẩm nang</a>
+            <a href="sao-luu.html"><i class="fa-solid fa-database"></i> Sao lưu</a>
+        </nav>
+        <div class="user-profile">
+            <div class="notification-wrapper">
+                <div class="notification-icon" id="notifBtn" title="Thông báo & Nhắc hẹn">
+                    <i class="fa-solid fa-bell"></i>
+                    <span class="notification-badge">2</span>
+                </div>
+            </div>
+            <a href="dang-nhap.html" class="btn-login"><i class="fa-solid fa-user"></i> Đăng nhập</a>
+        </div>
+    </header>
+
+    <main class="main-container">
+        <section class="page-header-section">
+            <div>
+                <h1 id="monthTitle">📅 Lịch Biểu Chăm Sóc & Ghi Chú</h1>
+                <p>Click vào bất kỳ ngày nào trong tháng để thêm hoặc chỉnh sửa ghi chú chăm sóc cây.</p>
+            </div>
+            <div class="badge" style="font-size: 0.9rem; padding: 8px 16px;">Đang tải thời gian thực...</div>
+        </section>
+
+        <!-- Lịch tháng dạng lưới -->
+        <div class="card calendar-month-card">
+            <div class="calendar-weekdays">
+                <div>Thứ Hai</div>
+                <div>Thứ Ba</div>
+                <div>Thứ Tư</div>
+                <div>Thứ Năm</div>
+                <div>Thứ Sáu</div>
+                <div>Thứ Bảy</div>
+                <div>Chủ Nhật</div>
+            </div>
+            <div class="calendar-grid-month" id="calendarGridMonth"></div>
+        </div>
+    </main>
+
+    <!-- Modal/Hộp thoại nhập ghi chú khi click vào ngày -->
+    <div id="noteModal" class="modal-overlay" style="display: none;">
+        <div class="card" style="width: 100%; max-width: 400px; padding: 1.5rem; position: relative;">
+            <h3 id="modalDateTitle" style="color: #2e7d32; margin-bottom: 10px;"><i class="fa-solid fa-pen-to-square"></i> Thêm ghi chú ngày</h3>
+            <div class="form-group">
+                <textarea id="noteContentInput" rows="4" placeholder="Nhập nội dung chăm sóc (VD: Tưới đẫm, bón phân hữu cơ...)" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 8px; outline: none;"></textarea>
+            </div>
+            <div style="display: flex; justify-content: flex-end; gap: 10px; margin-top: 1rem;">
+                <button type="button" class="btn-outline" onclick="closeNoteModal()">Hủy</button>
+                <button type="button" class="btn-primary" onclick="saveNoteForDay()">Lưu ghi chú</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

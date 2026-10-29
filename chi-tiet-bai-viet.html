@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chi Tiết Bài Viết - UrbanGarden</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header class="header">
+        <div class="logo">
+            <i class="fa-solid fa-seedling"></i>
+            <span>UrbanGarden</span>
+        </div>
+        <nav class="nav">
+            <a href="index.html"><i class="fa-solid fa-house"></i> Tổng quan</a>
+            <a href="vuon-cua-toi.html"><i class="fa-solid fa-plant-wilt"></i> Vườn của tôi</a>
+            <a href="lich-cham-soc.html"><i class="fa-solid fa-calendar-days"></i> Lịch chăm sóc</a>
+            <a href="cam-nang.html" class="active"><i class="fa-solid fa-book-open"></i> Cẩm nang</a>
+        </nav>
+        <div class="user-profile">
+            <!-- Biểu tượng thông báo & bảng sổ xuống -->
+            <div class="notification-wrapper">
+                <div class="notification-icon" id="notifBtn" title="Thông báo & Nhắc hẹn">
+                    <i class="fa-solid fa-bell"></i>
+                    <span class="notification-badge">2</span>
+                </div>
+
+                <!-- Bảng thông báo & Đặt nhắc hẹn -->
+                <div class="notification-dropdown" id="notifDropdown">
+                    <div class="dropdown-header">
+                        <h3><i class="fa-solid fa-bell"></i> Thông Báo & Nhắc Hẹn</h3>
+                    </div>
+                    
+                    <!-- Form đặt nhắc hẹn nhanh -->
+                    <div class="reminder-form">
+                        <h4><i class="fa-solid fa-clock"></i> Đặt nhắc hẹn mới</h4>
+                        <div class="form-group-sm">
+                            <input type="text" id="remindTitle" placeholder="Nội dung (VD: Tưới cây ớt)...">
+                        </div>
+                        <div class="form-group-sm">
+                            <input type="datetime-local" id="remindTime">
+                        </div>
+                        <button type="button" class="btn-primary-sm" onclick="addReminder()"><i class="fa-solid fa-plus"></i> Đặt nhắc hẹn</button>
+                    </div>
+
+                    <div class="dropdown-divider"></div>
+
+                    <!-- Danh sách thông báo -->
+                    <div class="notification-list" id="notifList">
+                        <div class="notif-item unread">
+                            <i class="fa-solid fa-droplet text-blue"></i>
+                            <div>
+                                <p><strong>Đã đến giờ tưới nước</strong> cho Giàn xà lách thủy canh.</p>
+                                <span class="notif-time">10 phút trước</span>
+                            </div>
+                        </div>
+                        <div class="notif-item">
+                            <i class="fa-solid fa-seedling text-green"></i>
+                            <div>
+                                <p><strong>Lịch bón phân</strong> Cà chua bi vào sáng mai.</p>
+                                <span class="notif-time">Hôm qua</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Nút Đăng nhập -->
+            <a href="dang-nhap.html" class="btn-login"><i class="fa-solid fa-user"></i> Đăng nhập</a>
+        </div>
+    </header>
+
+    <main class="main-container">
+        <section class="page-header-section">
+            <a href="cam-nang.html" class="btn-outline" style="text-decoration: none;"><i class="fa-solid fa-arrow-left"></i> Quay lại cẩm nang</a>
+        </section>
+
+        <article class="card" style="max-width: 850px; margin: 0 auto; padding: 2rem;">
+            <span class="location-tag">Kỹ thuật trồng</span>
+            <h1 style="font-size: 1.8rem; margin: 10px 0; color: #1b5e20;">Bí quyết trồng rau ăn lá trên sân thượng chịu nắng gắt</h1>
+            <p style="color: #888; font-size: 0.85rem; margin-bottom: 1.5rem;"><i class="fa-regular fa-clock"></i> Đọc 5 phút • Cập nhật hôm qua • Bởi Chuyên gia UrbanGarden</p>
+
+            <img src="https://images.unsplash.com/photo-1530836369250-ef72a3f5cda8?auto=format&fit=crop&w=800&q=80" alt="Trồng rau sạch" style="width: 100%; height: 320px; object-fit: cover; border-radius: 8px; margin-bottom: 1.5rem;">
+
+            <div style="line-height: 1.8; color: #444; font-size: 1rem;">
+                <p style="margin-bottom: 1rem;">Trồng rau trên sân thượng vào mùa hè nắng gắt luôn là thách thức lớn đối với gia chủ nông nghiệp đô thị. Dưới đây là những nguyên tắc quan trọng giúp khu vườn của bạn luôn xanh tốt:</p>
+                
+                <h3 style="color: #2e7d32; margin: 1.2rem 0 0.5rem 0;">1. Chọn giá thể giữ ẩm tốt</h3>
+                <p style="margin-bottom: 1rem;">Trộn thêm mụn dừa đã xử lý (30%), trấu hun (10%) và phân trù quế vào đất trồng. Lớp mụn dừa giúp giữ lại độ ẩm cần thiết cho rễ cây trong suốt những giờ nắng cao điểm.</p>
+
+                <h3 style="color: #2e7d32; margin: 1.2rem 0 0.5rem 0;">2. Lắp đặt lưới che nắng 50%</h3>
+                <p style="margin-bottom: 1rem;">Lưới lan màu đen hoặc xanh lá giúp giảm bớt lượng bức xạ nhiệt trực tiếp nhưng vẫn cung cấp đủ ánh sáng quang hợp cho rau ăn lá như xà lách, cải ngọt, rau muống.</p>
+
+                <h3 style="color: #2e7d32; margin: 1.2rem 0 0.5rem 0;">3. Thời gian tưới nước hợp lý</h3>
+                <p style="margin-bottom: 1rem;">Tưới đẫm vào lúc 6:00 - 7:00 sáng và 17:00 chiều mát. Tránh tuyệt đối tưới vào giữa trưa vì giọt nước đọng trên lá sẽ gây cháy lá dưới tác động của ánh nắng.</p>
+            </div>
+        </article>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>

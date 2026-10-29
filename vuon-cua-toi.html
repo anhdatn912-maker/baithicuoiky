@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vườn của tôi - UrbanGarden</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header class="header">
+        <div class="logo">
+            <i class="fa-solid fa-seedling"></i>
+            <span>UrbanGarden</span>
+        </div>
+        <nav class="nav">
+            <a href="index.html"><i class="fa-solid fa-house"></i> Tổng quan</a>
+            <a href="vuon-cua-toi.html" class="active"><i class="fa-solid fa-plant-wilt"></i> Vườn của tôi</a>
+            <a href="lich-cham-soc.html"><i class="fa-solid fa-calendar-days"></i> Lịch chăm sóc</a>
+            <a href="cam-nang.html"><i class="fa-solid fa-book-open"></i> Cẩm nang</a>
+            <a href="sao-luu.html"><i class="fa-solid fa-database"></i> Sao lưu</a>
+        </nav>
+        <div class="user-profile">
+            <div class="notification-wrapper">
+                <div class="notification-icon" id="notifBtn" title="Thông báo & Nhắc hẹn">
+                    <i class="fa-solid fa-bell"></i>
+                    <span class="notification-badge">2</span>
+                </div>
+            </div>
+            <a href="dang-nhap.html" class="btn-login"><i class="fa-solid fa-user"></i> Đăng nhập</a>
+        </div>
+    </header>
+
+    <main class="main-container">
+        <section class="page-header-section">
+            <div>
+                <h1>🌿 Danh Sách Cây Trồng Của Tôi</h1>
+                <p>Quản lý toàn bộ các chậu cây đang sinh trưởng tại các khu vực trong nhà.</p>
+            </div>
+            <a href="them-cay.html" class="btn-primary" style="text-decoration: none;"><i class="fa-solid fa-plus"></i> Thêm chậu cây mới</a>
+        </section>
+
+        <div class="filter-bar">
+            <button class="filter-btn active" data-filter="all">Tất cả</button>
+            <button class="filter-btn" data-filter="ban-cong">Ban công trước</button>
+            <button class="filter-btn" data-filter="san-thuong">Sân thượng</button>
+            <button class="filter-btn" data-filter="thuy-canh">Giàn thủy canh</button>
+        </div>
+
+        <!-- Khu vực hiển thị lưới danh sách cây (Sẽ được load động bằng JS) -->
+        <div class="my-plants-grid" id="myPlantsContainer">
+            <!-- Cây mẫu mặc định 1 -->
+            <div class="plant-detailed-card" data-category="ban-cong">
+                <img src="https://images.unsplash.com/photo-1592841200221-a6898f307baa?auto=format&fit=crop&w=400&q=80" alt="Cà chua bi">
+                <div class="plant-content">
+                    <span class="location-tag">Ban công trước</span>
+                    <h3>Cà chua bi (Chậu số 01)</h3>
+                    <p class="plant-status text-green"><i class="fa-solid fa-circle-check"></i> Đang ra quả • Đất ẩm tốt</p>
+                    <ul class="plant-specs">
+                        <li><span>Ngày gieo trồng:</span> 10/08/2026</li>
+                        <li><span>Chu kỳ tưới:</span> 1 lần/ngày</li>
+                    </ul>
+                    <div class="progress-bar"><div class="progress" style="width: 70%;"></div></div>
+                    <div class="card-actions">
+                        <a href="nhat-ky.html" class="btn-outline" style="text-decoration: none;">Xem nhật ký</a>
+                        <button class="btn-icon"><i class="fa-solid fa-ellipsis-vertical"></i></button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Cây mẫu mặc định 2 -->
+            <div class="plant-detailed-card" data-category="thuy-canh">
+                <img src="https://images.unsplash.com/photo-1550989460-0adf9ea622e2?auto=format&fit=crop&w=400&q=80" alt="Xà lách">
+                <div class="plant-content">
+                    <span class="location-tag">Giàn thủy canh</span>
+                    <h3>Xà lách lá xoăn</h3>
+                    <p class="plant-status text-orange"><i class="fa-solid fa-triangle-exclamation"></i> Cần bổ sung dinh dưỡng</p>
+                    <ul class="plant-specs">
+                        <li><span>Ngày gieo trồng:</span> 01/09/2026</li>
+                        <li><span>Dinh dưỡng PPM:</span> 800 ppm</li>
+                    </ul>
+                    <div class="progress-bar"><div class="progress warning" style="width: 40%;"></div></div>
+                    <div class="card-actions">
+                        <a href="nhat-ky.html" class="btn-outline" style="text-decoration: none;">Xem nhật ký</a>
+                        <button class="btn-icon"><i class="fa-solid fa-ellipsis-vertical"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>

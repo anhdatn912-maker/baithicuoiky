@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng Ký Tài Khoản - UrbanGarden</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body style="display: flex; justify-content: center; align-items: center; min-height: 100vh; background-color: #f4f7f6;">
+
+    <div class="card form-card" style="width: 100%; max-width: 400px; padding: 2rem;">
+        <div style="text-align: center; margin-bottom: 1.5rem;">
+            <i class="fa-solid fa-seedling" style="font-size: 2.5rem; color: #2e7d32;"></i>
+            <h1 style="font-size: 1.5rem; color: #1b5e20; margin-top: 10px;">Tạo Tài Khoản Mới</h1>
+            <p style="color: #666; font-size: 0.9rem;">Tham gia hệ thống Quản lý Vườn Đô Thị</p>
+        </div>
+
+        <!-- Bỏ action mặc định, dùng JS xử lý -->
+        <form id="registerForm">
+            <div class="form-group">
+                <label for="fullname">Họ và tên</label>
+                <input type="text" id="fullname" placeholder="Nhập họ và tên..." required>
+            </div>
+
+            <div class="form-group">
+                <label for="reg-email">Email / Tên đăng nhập</label>
+                <input type="email" id="reg-email" placeholder="Nhập email của bạn..." required>
+            </div>
+
+            <div class="form-group">
+                <label for="reg-password">Mật khẩu</label>
+                <input type="password" id="reg-password" placeholder="Tạo mật khẩu bảo mật..." required>
+            </div>
+
+            <button type="submit" class="btn-primary" style="width: 100%; justify-content: center; margin-top: 1rem; padding: 10px;">Đăng Ký Ngay</button>
+            
+            <div style="text-align: center; margin-top: 1rem; font-size: 0.9rem;">
+                Đã có tài khoản? <a href="dang-nhap.html" style="color: #2e7d32; text-decoration: none; font-weight: 500;">Đăng nhập</a>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('registerForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const name = document.getElementById('fullname').value;
+            const email = document.getElementById('reg-email').value;
+            const password = document.getElementById('reg-password').value;
+
+            // Lưu thông tin tài khoản vào LocalStorage
+            localStorage.setItem('registeredName', name);
+            localStorage.setItem('registeredEmail', email);
+            localStorage.setItem('registeredPassword', password);
+
+            alert('Đăng ký tài khoản thành công! Vui lòng đăng nhập.');
+            window.location.href = 'dang-nhap.html';
+        });
+    </script>
+</body>
+</html>

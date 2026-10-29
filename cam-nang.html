@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cẩm Nang Làm Vườn - UrbanGarden</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header class="header">
+        <div class="logo">
+            <i class="fa-solid fa-seedling"></i>
+            <span>UrbanGarden</span>
+        </div>
+        <nav class="nav">
+            <a href="index.html"><i class="fa-solid fa-house"></i> Tổng quan</a>
+            <a href="vuon-cua-toi.html"><i class="fa-solid fa-plant-wilt"></i> Vườn của tôi</a>
+            <a href="lich-cham-soc.html"><i class="fa-solid fa-calendar-days"></i> Lịch chăm sóc</a>
+            <a href="cam-nang.html" class="active"><i class="fa-solid fa-book-open"></i> Cẩm nang</a>
+        </nav>
+        <div class="user-profile">
+            <!-- Biểu tượng thông báo & bảng sổ xuống -->
+            <div class="notification-wrapper">
+                <div class="notification-icon" id="notifBtn" title="Thông báo & Nhắc hẹn">
+                    <i class="fa-solid fa-bell"></i>
+                    <span class="notification-badge">2</span>
+                </div>
+
+                <!-- Bảng thông báo & Đặt nhắc hẹn -->
+                <div class="notification-dropdown" id="notifDropdown">
+                    <div class="dropdown-header">
+                        <h3><i class="fa-solid fa-bell"></i> Thông Báo & Nhắc Hẹn</h3>
+                    </div>
+                    
+                    <!-- Form đặt nhắc hẹn nhanh -->
+                    <div class="reminder-form">
+                        <h4><i class="fa-solid fa-clock"></i> Đặt nhắc hẹn mới</h4>
+                        <div class="form-group-sm">
+                            <input type="text" id="remindTitle" placeholder="Nội dung (VD: Tưới cây ớt)...">
+                        </div>
+                        <div class="form-group-sm">
+                            <input type="datetime-local" id="remindTime">
+                        </div>
+                        <button type="button" class="btn-primary-sm" onclick="addReminder()"><i class="fa-solid fa-plus"></i> Đặt nhắc hẹn</button>
+                    </div>
+
+                    <div class="dropdown-divider"></div>
+
+                    <!-- Danh sách thông báo -->
+                    <div class="notification-list" id="notifList">
+                        <div class="notif-item unread">
+                            <i class="fa-solid fa-droplet text-blue"></i>
+                            <div>
+                                <p><strong>Đã đến giờ tưới nước</strong> cho Giàn xà lách thủy canh.</p>
+                                <span class="notif-time">10 phút trước</span>
+                            </div>
+                        </div>
+                        <div class="notif-item">
+                            <i class="fa-solid fa-seedling text-green"></i>
+                            <div>
+                                <p><strong>Lịch bón phân</strong> Cà chua bi vào sáng mai.</p>
+                                <span class="notif-time">Hôm qua</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Nút Đăng nhập -->
+            <a href="dang-nhap.html" class="btn-login"><i class="fa-solid fa-user"></i> Đăng nhập</a>
+        </div>
+    </header>
+
+    <main class="main-container">
+        <section class="page-header-section">
+            <div>
+                <h1>📖 Cẩm Nang Nông Nghiệp Đô Thị</h1>
+                <p>Kiến thức khoa học, mẹo hay trồng rau sạch tại ban công và sân thượng.</p>
+            </div>
+        </section>
+
+        <!-- Thanh lọc danh mục bài viết -->
+        <div class="filter-bar">
+            <button class="filter-btn active" data-filter="all">Tất cả bài viết</button>
+            <button class="filter-btn" data-filter="ky-thuat">Kỹ thuật trồng</button>
+            <button class="filter-btn" data-filter="sau-benh">Phòng trừ sâu bệnh</button>
+            <button class="filter-btn" data-filter="dinh-duong">Dinh dưỡng hữu cơ</button>
+        </div>
+
+        <!-- Danh sách bài viết -->
+        <div class="my-plants-grid">
+            
+            <!-- Bài viết 1: Kỹ thuật trồng -->
+            <div class="plant-detailed-card" data-category="ky-thuat">
+                <img src="https://images.unsplash.com/photo-1530836369250-ef72a3f5cda8?auto=format&fit=crop&w=400&q=80" alt="Kỹ thuật trồng rau">
+                <div class="plant-content">
+                    <span class="location-tag">Kỹ thuật trồng</span>
+                    <h3>Bí quyết trồng rau ăn lá trên sân thượng chịu nắng gắt</h3>
+                    <p class="plant-status text-green">Đọc 5 phút • Cập nhật hôm qua</p>
+                    <p style="font-size: 0.9rem; color: #666; margin-bottom: 10px;">Hướng dẫn cách chọn đất, che lưới âm và giữ ẩm hiệu quả trong mùa nắng nóng.</p>
+                    <div class="card-actions">
+                        <a href="chi-tiet-bai-viet.html" class="btn-outline" style="text-decoration: none;">Đọc tiếp</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bài viết 2: Phòng trừ sâu bệnh -->
+            <div class="plant-detailed-card" data-category="sau-benh">
+                <img src="https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?auto=format&fit=crop&w=400&q=80" alt="Phòng trừ sâu bệnh">
+                <div class="plant-content">
+                    <span class="location-tag">Phòng trừ sâu bệnh</span>
+                    <h3>Phòng trừ rệp sáp và sâu xanh bằng dung dịch tỏi ớt</h3>
+                    <p class="plant-status text-orange">Đọc 3 phút • 3 ngày trước</p>
+                    <p style="font-size: 0.9rem; color: #666; margin-bottom: 10px;">Công thức pha chế thuốc trừ sâu sinh học an toàn tuyệt đối cho rau gia đình.</p>
+                    <div class="card-actions">
+                        <a href="sau-benh-chi-tiet.html" class="btn-outline" style="text-decoration: none;">Đọc tiếp</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bài viết 3: Dinh dưỡng hữu cơ -->
+            <div class="plant-detailed-card" data-category="dinh-duong">
+                <img src="https://images.unsplash.com/photo-1592841200221-a6898f307baa?auto=format&fit=crop&w=400&q=80" alt="Dinh dưỡng hữu cơ">
+                <div class="plant-content">
+                    <span class="location-tag">Dinh dưỡng hữu cơ</span>
+                    <h3>Cách ủ phân compost từ rác thải bếp đơn giản tại nhà</h3>
+                    <p class="plant-status text-green">Đọc 4 phút • 1 tuần trước</p>
+                    <p style="font-size: 0.9rem; color: #666; margin-bottom: 10px;">Tận dụng vỏ trái cây và rau thừa làm nguồn phân bón giàu dinh dưỡng cho khu vườn.</p>
+                    <div class="card-actions">
+                        <a href="dinh-duong-chi-tiet.html" class="btn-outline" style="text-decoration: none;">Đọc tiếp</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>

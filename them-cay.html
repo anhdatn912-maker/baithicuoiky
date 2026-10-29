@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thêm Cây Mới - UrbanGarden</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header class="header">
+        <div class="logo">
+            <i class="fa-solid fa-seedling"></i>
+            <span>UrbanGarden</span>
+        </div>
+        <nav class="nav">
+            <a href="index.html"><i class="fa-solid fa-house"></i> Tổng quan</a>
+            <a href="vuon-cua-toi.html"><i class="fa-solid fa-plant-wilt"></i> Vườn của tôi</a>
+            <a href="lich-cham-soc.html"><i class="fa-solid fa-calendar-days"></i> Lịch chăm sóc</a>
+            <a href="cam-nang.html"><i class="fa-solid fa-book-open"></i> Cẩm nang</a>
+            <a href="sao-luu.html"><i class="fa-solid fa-database"></i> Sao lưu</a>
+        </nav>
+        <div class="user-profile">
+            <div class="notification-wrapper">
+                <div class="notification-icon" id="notifBtn" title="Thông báo & Nhắc hẹn">
+                    <i class="fa-solid fa-bell"></i>
+                    <span class="notification-badge">2</span>
+                </div>
+            </div>
+            <a href="dang-nhap.html" class="btn-login"><i class="fa-solid fa-user"></i> Đăng nhập</a>
+        </div>
+    </header>
+
+    <main class="main-container">
+        <section class="page-header-section">
+            <div>
+                <h1>🌱 Thêm Chậu Cây Mới</h1>
+                <p>Nhập thông tin chi tiết để hệ thống theo dõi và nhắc lịch chăm sóc tự động.</p>
+            </div>
+            <a href="vuon-cua-toi.html" class="btn-outline" style="text-decoration: none;"><i class="fa-solid fa-arrow-left"></i> Quay lại</a>
+        </section>
+
+        <div class="card form-card">
+            <form id="addPlantForm">
+                <div class="form-group">
+                    <label for="plant-name">Tên cây / Giống cây</label>
+                    <input type="text" id="plant-name" placeholder="Ví dụ: Cà chua bi, Xà lách, Ớt hiểm..." required>
+                </div>
+
+                <div class="form-group">
+                    <label for="plant-location">Khu vực trồng</label>
+                    <select id="plant-location">
+                        <option value="ban-cong">Ban công trước</option>
+                        <option value="san-thuong">Sân thượng</option>
+                        <option value="thuy-canh">Giàn thủy canh</option>
+                    </select>
+                </div>
+
+                <div class="form-row" style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                    <div class="form-group">
+                        <label for="plant-date">Ngày gieo trồng</label>
+                        <input type="date" id="plant-date" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="watering-cycle">Chu kỳ tưới nước</label>
+                        <select id="watering-cycle">
+                            <option value="1 lần / ngày">1 lần / ngày</option>
+                            <option value="2 lần / ngày">2 lần / ngày</option>
+                            <option value="2 ngày / lần">2 ngày / lần</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="plant-image">Link hình ảnh minh họa (URL)</label>
+                    <input type="url" id="plant-image" placeholder="https://images.unsplash.com/... (Bỏ trống sẽ dùng ảnh mặc định)">
+                </div>
+
+                <div class="form-group">
+                    <label for="plant-notes">Ghi chú ban đầu</label>
+                    <textarea id="plant-notes" rows="3" placeholder="Tình trạng đất, phân bón lót..."></textarea>
+                </div>
+
+                <div class="form-actions" style="display: flex; justify-content: flex-end; gap: 10px; margin-top: 1.5rem;">
+                    <a href="vuon-cua-toi.html" class="btn-outline" style="text-decoration: none;">Hủy bỏ</a>
+                    <button type="submit" class="btn-primary"><i class="fa-solid fa-check"></i> Lưu chậu cây</button>
+                </div>
+            </form>
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+    <script>
+        // Xử lý lưu chậu cây mới vào localStorage
+        document.getElementById('addPlantForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const name = document.getElementById('plant-name').value;
+            const locationVal = document.getElementById('plant-location').value;
+            const date = document.getElementById('plant-date').value;
+            const cycle = document.getElementById('watering-cycle').value;
+            const imageUrl = document.getElementById('plant-image').value.trim() || 'https://images.unsplash.com/photo-1592841200221-a6898f307baa?auto=format&fit=crop&w=400&q=80';
+
+            // Ánh xạ tên khu vực hiển thị
+            let locationName = 'Ban công trước';
+            if (locationVal === 'san-thuong') locationName = 'Sân thượng';
+            if (locationVal === 'thuy-canh') locationName = 'Giàn thủy canh';
+
+            const newPlant = {
+                id: Date.now(),
+                name: name,
+                category: locationVal,
+                location: locationName,
+                date: date || 'Hôm nay',
+                cycle: cycle,
+                image: imageUrl
+            };
+
+            // Lấy danh sách cũ từ localStorage hoặc mảng rỗng
+            let savedPlants = JSON.parse(localStorage.getItem('urban_plants')) || [];
+            savedPlants.push(newPlant);
+            localStorage.setItem('urban_plants', JSON.stringify(savedPlants));
+
+            alert('Thêm chậu cây mới thành công!');
+            window.location.href = 'vuon-cua-toi.html';
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phòng Trừ Sâu Bệnh - UrbanGarden</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header class="header">
+        <div class="logo">
+            <i class="fa-solid fa-seedling"></i>
+            <span>UrbanGarden</span>
+        </div>
+        <nav class="nav">
+            <a href="index.html"><i class="fa-solid fa-house"></i> Tổng quan</a>
+            <a href="vuon-cua-toi.html"><i class="fa-solid fa-plant-wilt"></i> Vườn của tôi</a>
+            <a href="lich-cham-soc.html"><i class="fa-solid fa-calendar-days"></i> Lịch chăm sóc</a>
+            <a href="cam-nang.html" class="active"><i class="fa-solid fa-book-open"></i> Cẩm nang</a>
+        </nav>
+        <div class="user-profile">
+            <!-- Biểu tượng thông báo & bảng sổ xuống -->
+            <div class="notification-wrapper">
+                <div class="notification-icon" id="notifBtn" title="Thông báo & Nhắc hẹn">
+                    <i class="fa-solid fa-bell"></i>
+                    <span class="notification-badge">2</span>
+                </div>
+
+                <!-- Bảng thông báo & Đặt nhắc hẹn -->
+                <div class="notification-dropdown" id="notifDropdown">
+                    <div class="dropdown-header">
+                        <h3><i class="fa-solid fa-bell"></i> Thông Báo & Nhắc Hẹn</h3>
+                    </div>
+                    
+                    <!-- Form đặt nhắc hẹn nhanh -->
+                    <div class="reminder-form">
+                        <h4><i class="fa-solid fa-clock"></i> Đặt nhắc hẹn mới</h4>
+                        <div class="form-group-sm">
+                            <input type="text" id="remindTitle" placeholder="Nội dung (VD: Tưới cây ớt)...">
+                        </div>
+                        <div class="form-group-sm">
+                            <input type="datetime-local" id="remindTime">
+                        </div>
+                        <button type="button" class="btn-primary-sm" onclick="addReminder()"><i class="fa-solid fa-plus"></i> Đặt nhắc hẹn</button>
+                    </div>
+
+                    <div class="dropdown-divider"></div>
+
+                    <!-- Danh sách thông báo -->
+                    <div class="notification-list" id="notifList">
+                        <div class="notif-item unread">
+                            <i class="fa-solid fa-droplet text-blue"></i>
+                            <div>
+                                <p><strong>Đã đến giờ tưới nước</strong> cho Giàn xà lách thủy canh.</p>
+                                <span class="notif-time">10 phút trước</span>
+                            </div>
+                        </div>
+                        <div class="notif-item">
+                            <i class="fa-solid fa-seedling text-green"></i>
+                            <div>
+                                <p><strong>Lịch bón phân</strong> Cà chua bi vào sáng mai.</p>
+                                <span class="notif-time">Hôm qua</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Nút Đăng nhập -->
+            <a href="dang-nhap.html" class="btn-login"><i class="fa-solid fa-user"></i> Đăng nhập</a>
+        </div>
+    </header>
+
+    <main class="main-container">
+        <section class="page-header-section">
+            <a href="cam-nang.html" class="btn-outline" style="text-decoration: none;"><i class="fa-solid fa-arrow-left"></i> Quay lại cẩm nang</a>
+        </section>
+
+        <article class="card" style="max-width: 850px; margin: 0 auto; padding: 2rem;">
+            <span class="location-tag">Phòng trừ sâu bệnh</span>
+            <h1 style="font-size: 1.8rem; margin: 10px 0; color: #1b5e20;">Phòng trừ rệp sáp và sâu xanh bằng dung dịch tỏi ớt sinh học</h1>
+            <p style="color: #888; font-size: 0.85rem; margin-bottom: 1.5rem;"><i class="fa-regular fa-clock"></i> Đọc 3 phút • 3 ngày trước • Tác giả: Đội ngũ Kỹ sư UrbanGarden</p>
+
+            <img src="https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?auto=format&fit=crop&w=800&q=80" alt="Phòng trừ sâu bệnh" style="width: 100%; height: 320px; object-fit: cover; border-radius: 8px; margin-bottom: 1.5rem;">
+
+            <div style="line-height: 1.8; color: #444; font-size: 1rem;">
+                <p style="margin-bottom: 1rem;">Sử dụng thuốc trừ sâu hóa học trong vườn rau đô thị tiềm ẩn nhiều rủi ro cho sức khỏe gia đình. Dung dịch tỏi, ớt, gừng là chế phẩm sinh học an toàn, giúp xua đuổi rệp sáp và sâu xanh hiệu quả.</p>
+                
+                <h3 style="color: #2e7d32; margin: 1.2rem 0 0.5rem 0;">1. Nguyên liệu chuẩn bị</h3>
+                <ul style="margin-left: 1.5rem; margin-bottom: 1rem;">
+                    <li>1kg tỏi, 1kg ớt tươi, 1kg gừng tươi.</li>
+                    <li>3 lit rượu trắng (35 - 40 độ).</li>
+                    <li>Bình gốm hoặc bình thủy tinh có nắp đậy kín.</li>
+                </ul>
+
+                <h3 style="color: #2e7d32; margin: 1.2rem 0 0.5rem 0;">2. Cách chế biến dung dịch</h3>
+                <p style="margin-bottom: 1rem;">Giã nhỏ hoặc xay nhuyễn tỏi, ớt, gừng. Cho tất cả vào bình và đổ 3 lít rượu vào ngâm trong khoảng 15 ngày. Tinh dầu từ tỏi ớt chứa chất kháng sinh tự nhiên làm cay, bỏng mắt và xua đuổi các loại sâu bọ.</p>
+
+                <h3 style="color: #2e7d32; margin: 1.2rem 0 0.5rem 0;">3. Hướng dẫn phun xịt</h3>
+                <p style="margin-bottom: 1rem;">Lấy 20ml dung dịch cốt pha với 2 lít nước sạch, phun đều lên 2 mặt lá vào lúc chiều mát. Phun định kỳ 5-7 ngày/lần để phòng ngừa sâu bệnh.</p>
+            </div>
+        </article>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
