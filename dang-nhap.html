@@ -36,28 +36,7 @@
         </form>
     </div>
 
-    <script>
-        document.getElementById('loginForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const emailInput = document.getElementById('email').value;
-            const passInput = document.getElementById('password').value;
-
-            const savedEmail = localStorage.getItem('registeredEmail');
-            const savedPass = localStorage.getItem('registeredPassword');
-            const savedName = localStorage.getItem('registeredName') || 'Gia chủ Xanh';
-
-            // Kiểm tra thông tin đăng nhập (hoặc cho phép linh hoạt nếu chưa đăng ký tài khoản nào)
-            if ((savedEmail && emailInput === savedEmail && passInput === savedPass) || (!savedEmail)) {
-                // Đánh dấu đã đăng nhập thành công
-                localStorage.setItem('isLoggedIn', 'true');
-                localStorage.setItem('currentUserName', savedName);
-                
-                alert('Đăng nhập thành công! Chào mừng bạn trở lại khu vườn.');
-                window.location.href = 'index.html';
-            } else {
-                alert('Sai tài khoản hoặc mật khẩu! Vui lòng kiểm tra lại.');
-            }
-        });
-    </script>
+    <!-- Tích hợp logic xử lý vào script.js chung -->
+    <script src="script.js"></script>
 </body>
 </html>

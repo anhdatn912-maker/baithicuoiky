@@ -16,7 +16,6 @@
             <p style="color: #666; font-size: 0.9rem;">Tham gia hệ thống Quản lý Vườn Đô Thị</p>
         </div>
 
-        <!-- Bỏ action mặc định, dùng JS xử lý -->
         <form id="registerForm">
             <div class="form-group">
                 <label for="fullname">Họ và tên</label>
@@ -41,21 +40,7 @@
         </form>
     </div>
 
-    <script>
-        document.getElementById('registerForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const name = document.getElementById('fullname').value;
-            const email = document.getElementById('reg-email').value;
-            const password = document.getElementById('reg-password').value;
-
-            // Lưu thông tin tài khoản vào LocalStorage
-            localStorage.setItem('registeredName', name);
-            localStorage.setItem('registeredEmail', email);
-            localStorage.setItem('registeredPassword', password);
-
-            alert('Đăng ký tài khoản thành công! Vui lòng đăng nhập.');
-            window.location.href = 'dang-nhap.html';
-        });
-    </script>
+    <!-- Tích hợp logic xử lý vào script.js chung -->
+    <script src="script.js"></script>
 </body>
 </html>
