@@ -15,117 +15,91 @@
         </div>
         <nav class="nav">
             <a href="index.html"><i class="fa-solid fa-house"></i> Tổng quan</a>
-            <a href="vuon-cua-toi.html" class="active"><i class="fa-solid fa-plant-wilt"></i> Vườn của tôi</a>
+            <a href="vuon-cua-toi.html"><i class="fa-solid fa-plant-wilt"></i> Vườn của tôi</a>
             <a href="lich-cham-soc.html"><i class="fa-solid fa-calendar-days"></i> Lịch chăm sóc</a>
             <a href="cam-nang.html"><i class="fa-solid fa-book-open"></i> Cẩm nang</a>
+            <a href="nhat-ky.html" class="active"><i class="fa-solid fa-book"></i> Nhật ký</a>
+            <a href="sao-luu.html"><i class="fa-solid fa-database"></i> Sao lưu</a>
         </nav>
         <div class="user-profile">
-            <!-- Biểu tượng thông báo & bảng sổ xuống -->
             <div class="notification-wrapper">
                 <div class="notification-icon" id="notifBtn" title="Thông báo & Nhắc hẹn">
                     <i class="fa-solid fa-bell"></i>
                     <span class="notification-badge">2</span>
                 </div>
-
-                <!-- Bảng thông báo & Đặt nhắc hẹn -->
-                <div class="notification-dropdown" id="notifDropdown">
-                    <div class="dropdown-header">
-                        <h3><i class="fa-solid fa-bell"></i> Thông Báo & Nhắc Hẹn</h3>
-                    </div>
-                    
-                    <!-- Form đặt nhắc hẹn nhanh -->
-                    <div class="reminder-form">
-                        <h4><i class="fa-solid fa-clock"></i> Đặt nhắc hẹn mới</h4>
-                        <div class="form-group-sm">
-                            <input type="text" id="remindTitle" placeholder="Nội dung (VD: Tưới cây ớt)...">
-                        </div>
-                        <div class="form-group-sm">
-                            <input type="datetime-local" id="remindTime">
-                        </div>
-                        <button type="button" class="btn-primary-sm" onclick="addReminder()"><i class="fa-solid fa-plus"></i> Đặt nhắc hẹn</button>
-                    </div>
-
-                    <div class="dropdown-divider"></div>
-
-                    <!-- Danh sách thông báo -->
-                    <div class="notification-list" id="notifList">
-                        <div class="notif-item unread">
-                            <i class="fa-solid fa-droplet text-blue"></i>
-                            <div>
-                                <p><strong>Đã đến giờ tưới nước</strong> cho Giàn xà lách thủy canh.</p>
-                                <span class="notif-time">10 phút trước</span>
-                            </div>
-                        </div>
-                        <div class="notif-item">
-                            <i class="fa-solid fa-seedling text-green"></i>
-                            <div>
-                                <p><strong>Lịch bón phân</strong> Cà chua bi vào sáng mai.</p>
-                                <span class="notif-time">Hôm qua</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
-
-            <!-- Nút Đăng nhập -->
             <a href="dang-nhap.html" class="btn-login"><i class="fa-solid fa-user"></i> Đăng nhập</a>
         </div>
     </header>
 
     <main class="main-container">
-        <section class="page-header-section">
+        <section class="page-header-section" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
             <div>
-                <h1>📖 Nhật Ký Chăm Sóc: Cà chua bi (Chậu số 01)</h1>
-                <p>Theo dõi toàn bộ lịch sử sinh trưởng, bón phân và tưới nước của chậu cây.</p>
+                <h1>📖 Nhật Ký Chăm Sóc Vườn</h1>
+                <p>Theo dõi chi tiết lịch sử sinh trưởng, bón phân và tưới nước của từng chậu cây.</p>
             </div>
-            <a href="vuon-cua-toi.html" class="btn-outline" style="text-decoration: none;"><i class="fa-solid fa-arrow-left"></i> Quay lại vườn</a>
+            <div style="display: flex; gap: 10px;">
+                <button type="button" class="btn-outline" onclick="exportDiaryData()"><i class="fa-solid fa-download"></i> Sao lưu nhật ký</button>
+                <button type="button" class="btn-primary" onclick="openDiaryModal()"><i class="fa-solid fa-plus"></i> Thêm nhật ký</button>
+            </div>
         </section>
 
-        <div class="card" style="margin-bottom: 1.5rem;">
-            <div class="card-header">
-                <h2><i class="fa-solid fa-pen-to-square"></i> Thêm ghi chú mới vào nhật ký</h2>
-            </div>
-            <form style="display: flex; gap: 10px; align-items: center;">
-                <input type="text" placeholder="Nhập nội dung ghi chú (Ví dụ: Cây đã bắt đầu ra hoa lứa đầu...)" style="flex-grow: 1; padding: 10px; border: 1px solid #ddd; border-radius: 6px; outline: none;">
-                <button type="submit" class="btn-primary" style="white-space: nowrap;"><i class="fa-solid fa-plus"></i> Ghi nhận</button>
-            </form>
-        </div>
-
+        <!-- Bảng hiển thị danh sách nhật ký -->
         <div class="card">
             <div class="card-header">
-                <h2><i class="fa-solid fa-clock-rotate-left"></i> Lịch sử hoạt động</h2>
+                <h2><i class="fa-solid fa-table-list text-green"></i> Danh Sách Bản Ghi Nhật Ký</h2>
             </div>
-            <ul class="task-list">
-                <li class="task-item" style="padding: 15px 0;">
-                    <div style="display: flex; justify-content: space-between; width: 100%; align-items: center;">
-                        <div>
-                            <span class="task-title" style="font-weight: bold; color: #2e7d32;"><i class="fa-solid fa-seedling"></i> Bón phân hữu cơ định kỳ</span>
-                            <p style="font-size: 0.9rem; color: #666; margin-top: 4px;">Đã bón bổ sung phân trù quế quanh gốc, cây hấp thụ tốt, lá xanh đậm.</p>
-                        </div>
-                        <span class="badge">18/09/2026 - 07:00</span>
-                    </div>
-                </li>
-                <li class="task-item" style="padding: 15px 0;">
-                    <div style="display: flex; justify-content: space-between; width: 100%; align-items: center;">
-                        <div>
-                            <span class="task-title" style="font-weight: bold; color: #1565c0;"><i class="fa-solid fa-droplet"></i> Tưới nước và kiểm tra độ ẩm</span>
-                            <p style="font-size: 0.9rem; color: #666; margin-top: 4px;">Tưới đẫm gốc vào buổi chiều mát. Độ ẩm đất đạt mức tối ưu.</p>
-                        </div>
-                        <span class="badge">15/09/2026 - 17:30</span>
-                    </div>
-                </li>
-                <li class="task-item" style="padding: 15px 0;">
-                    <div style="display: flex; justify-content: space-between; width: 100%; align-items: center;">
-                        <div>
-                            <span class="task-title" style="font-weight: bold; color: #ef6c00;"><i class="fa-solid fa-spa"></i> Gieo hạt giống ban đầu</span>
-                            <p style="font-size: 0.9rem; color: #666; margin-top: 4px;">Gieo hạt vào giá thể sạch, phủ lớp đất mỏng và đặt ở nơi râm mát.</p>
-                        </div>
-                        <span class="badge">10/08/2026 - 08:00</span>
-                    </div>
-                </li>
-            </ul>
+            <div style="overflow-x: auto;">
+                <table class="data-table" id="diaryTable">
+                    <thead>
+                        <tr>
+                            <th>Ngày ghi nhận</th>
+                            <th>Tên cây / Khu vực</th>
+                            <th>Nội dung công việc</th>
+                            <th>Trạng thái</th>
+                            <th>Thao tác</th>
+                        </tr>
+                    </thead>
+                    <tbody id="diaryTableBody">
+                        <!-- Dữ liệu được nạp động qua JavaScript -->
+                    </tbody>
+                </table>
+            </div>
         </div>
     </main>
+
+    <!-- Hộp thoại (Modal) thêm nhật ký mới -->
+    <div id="diaryModal" class="modal-overlay" style="display: none;">
+        <div class="card" style="width: 100%; max-width: 450px; padding: 1.5rem; position: relative;">
+            <h3 style="color: #2e7d32; margin-bottom: 15px;"><i class="fa-solid fa-pen-to-square"></i> Thêm Nhật Ký Mới</h3>
+            <form id="diaryForm">
+                <div class="form-group">
+                    <label>Ngày ghi nhận</label>
+                    <input type="date" id="diaryDate" required>
+                </div>
+                <div class="form-group">
+                    <label>Tên cây / Khu vực</label>
+                    <input type="text" id="diaryPlant" placeholder="VD: Cà chua bi - Ban công trước" required>
+                </div>
+                <div class="form-group">
+                    <label>Nội dung công việc</label>
+                    <textarea id="diaryContent" rows="3" placeholder="VD: Tưới đẫm nước, tỉa lá vàng gốc..." required></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Trạng thái cây</label>
+                    <select id="diaryStatus">
+                        <option value="Sinh trưởng tốt">Sinh trưởng tốt</option>
+                        <option value="Cần chú ý">Cần chú ý / Sâu bệnh nhẹ</option>
+                        <option value="Đang ra hoa/quả">Đang ra hoa / kết quả</option>
+                    </select>
+                </div>
+                <div style="display: flex; justify-content: flex-end; gap: 10px; margin-top: 1rem;">
+                    <button type="button" class="btn-outline" onclick="closeDiaryModal()">Hủy</button>
+                    <button type="submit" class="btn-primary">Lưu nhật ký</button>
+                </div>
+            </form>
+        </div>
+    </div>
 
     <script src="script.js"></script>
 </body>

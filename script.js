@@ -326,3 +326,114 @@ window.addEventListener('DOMContentLoaded', () => {
         }
     }
 });
+
+// ==========================================================================
+// 6. QUẢN LÝ NHẬT KÝ VƯỜN & SAO LƯU DỮ LIỆU NHẬT KÝ
+// ==========================================================================
+window.addEventListener('DOMContentLoaded', () => {
+    renderDiaryTable();
+    
+    const diaryForm = document.getElementById('diaryForm');
+    if (diaryForm) {
+        diaryForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const date = document.getElementById('diaryDate').value;
+            const plant = document.getElementById('diaryPlant').value;
+            const content = document.getElementById('diaryContent').value;
+            const status = document.getElementById('diaryStatus').value;
+
+            const newEntry = {
+                id: Date.now(),
+                date: date,
+                plant: plant,
+                content: content,
+                status: status
+            };
+
+            let diaries = JSON.parse(localStorage.getItem('urban_diary_logs')) || [];
+            diaries.unshift(newEntry); // Đưa bản ghi mới nhất lên đầu bảng
+            localStorage.setItem('urban_diary_logs', JSON.stringify(diaries));
+
+            alert('Thêm bản ghi nhật ký thành công!');
+            closeDiaryModal();
+            renderDiaryTable();
+        });
+    }
+});
+
+function renderDiaryTable() {
+    const tbody = document.getElementById('diaryTableBody');
+    if (!tbody) return;
+
+    let diaries = JSON.parse(localStorage.getItem('urban_diary_logs')) || [];
+    
+    // Tạo sẵn dữ liệu mẫu minh họa nếu chưa có bản ghi nào
+    if (diaries.length === 0) {
+        diaries = [
+            { id: 1, date: '2026-10-28', plant: 'Cà chua bi (Ban công trước)', content: 'Bón phân trùn quế gốc, tưới nước lúc sáng sớm.', status: 'Sinh trưởng tốt' },
+            { id: 2, date: '2026-10-29', plant: 'Xà lách lá xoăn (Thủy canh)', content: 'Kiểm tra nồng độ dinh dưỡng PPM ở mức 800.', status: 'Cần chú ý' }
+        ];
+        localStorage.setItem('urban_diary_logs', JSON.stringify(diaries));
+    }
+
+    let html = '';
+    diaries.forEach(item => {
+        let badgeClass = 'text-green';
+        if (item.status.includes('Chú ý')) badgeClass = 'text-orange';
+
+        html += `
+            <tr>
+                <td><strong>${item.date}</strong></td>
+                <td>${item.plant}</td>
+                <td>${item.content}</td>
+                <td><span class="${badgeClass}"><i class="fa-solid fa-circle" style="font-size:0.5rem; vertical-align:middle;"></i> ${item.status}</span></td>
+                <td>
+                    <button onclick="deleteDiary(${item.id})" style="background:none; border:none; color:#ef4444; cursor:pointer; font-size:1rem;" title="Xóa bản ghi"><i class="fa-solid fa-trash"></i></button>
+                </td>
+            </tr>
+        `;
+    });
+    tbody.innerHTML = html;
+}
+
+function openDiaryModal() {
+    const modal = document.getElementById('diaryModal');
+    if (modal) {
+        // Tự động gán ngày hôm nay vào ô chọn ngày
+        const today = new Date().toISOString().split('T')[0];
+        const dateInput = document.getElementById('diaryDate');
+        if (dateInput) dateInput.value = today;
+        modal.style.display = 'flex';
+    }
+}
+
+function closeDiaryModal() {
+    const modal = document.getElementById('diaryModal');
+    if (modal) modal.style.display = 'none';
+}
+
+function deleteDiary(id) {
+    if (confirm('Bạn có chắc chắn muốn xóa bản ghi nhật ký này không?')) {
+        let diaries = JSON.parse(localStorage.getItem('urban_diary_logs')) || [];
+        diaries = diaries.filter(d => d.id !== id);
+        localStorage.setItem('urban_diary_logs', JSON.stringify(diaries));
+        renderDiaryTable();
+        alert('Đã xóa bản ghi thành công!');
+    }
+}
+
+function exportDiaryData() {
+    let diaries = JSON.parse(localStorage.getItem('urban_diary_logs')) || [];
+    if (diaries.length === 0) {
+        alert('Không có dữ liệu nhật ký để sao lưu!');
+        return;
+    }
+    const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(diaries, null, 2));
+    const downloadAnchor = document.createElement('a');
+    downloadAnchor.setAttribute("href", dataStr);
+    downloadAnchor.setAttribute("download", `urbangarden_nhatky_${new Date().toISOString().slice(0,10)}.json`);
+    document.body.appendChild(downloadAnchor);
+    downloadAnchor.click();
+    downloadAnchor.remove();
+    alert('Đã tải xuống file sao lưu nhật ký thành công!');
+}
