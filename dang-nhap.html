@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng Nhập - UrbanGarden</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body style="display: flex; justify-content: center; align-items: center; height: 100vh; background-color: #f4f7f6;">
+
+    <div class="card form-card" style="width: 100%; max-width: 400px; padding: 2rem;">
+        <div style="text-align: center; margin-bottom: 1.5rem;">
+            <i class="fa-solid fa-seedling" style="font-size: 2.5rem; color: #2e7d32;"></i>
+            <h1 style="font-size: 1.5rem; color: #1b5e20; margin-top: 10px;">Đăng Nhập UrbanGarden</h1>
+            <p style="color: #666; font-size: 0.9rem;">Hệ thống Quản lý Vườn phố & Nông nghiệp Đô thị</p>
+        </div>
+
+        <form id="loginForm">
+            <div class="form-group">
+                <label for="email">Email hoặc Tên đăng nhập</label>
+                <input type="text" id="email" placeholder="Nhập tài khoản của bạn..." required>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Mật khẩu</label>
+                <input type="password" id="password" placeholder="Nhập mật khẩu..." required>
+            </div>
+
+            <button type="submit" class="btn-primary" style="width: 100%; justify-content: center; margin-top: 1rem; padding: 10px;">Đăng Nhập</button>
+            
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 1rem; font-size: 0.9rem;">
+                <a href="dang-ky.html" style="color: #2e7d32; text-decoration: none; font-weight: 500;">Tạo tài khoản mới</a>
+                <a href="index.html" style="color: #666; text-decoration: none;"><i class="fa-solid fa-arrow-left"></i> Về trang chủ</a>
+            </div>
+        </form>
+    </div>
+
+    <!-- Tích hợp logic xử lý vào script.js chung -->
+    <script src="script.js"></script>
+</body>
+</html>
