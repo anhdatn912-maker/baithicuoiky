@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
+
 <body style="display: flex; justify-content: center; align-items: center; height: 100vh; background-color: #f4f7f6;">
 
     <div class="card form-card" style="width: 100%; max-width: 400px; padding: 2rem;">
@@ -24,7 +25,10 @@
 
             <div class="form-group">
                 <label for="password">Mật khẩu</label>
-                <input type="password" id="password" placeholder="Nhập mật khẩu..." required>
+                <div style="position: relative; display: flex; align-items: center;">
+                    <input type="password" id="password" placeholder="Nhập mật khẩu..." required style="width: 100%; padding-right: 40px;">
+                    <i class="fa-solid fa-eye-slash" id="togglePassword" style="position: absolute; right: 12px; cursor: pointer; color: #888;"></i>
+                </div>
             </div>
 
             <button type="submit" class="btn-primary" style="width: 100%; justify-content: center; margin-top: 1rem; padding: 10px;">Đăng Nhập</button>
@@ -36,7 +40,97 @@
         </form>
     </div>
 
-    <!-- Tích hợp logic xử lý vào script.js chung -->
-    <script src="script.js"></script>
+    <!-- Popup Thông Báo Hiện Đại (Đã được đưa vào đúng bên trong body) -->
+    <div id="customModal" style="display: none; position: fixed; inset: 0; background: rgba(0, 0, 0, 0.45); z-index: 99999; align-items: center; justify-content: center;">
+        <div style="background: #ffffff; width: 90%; max-width: 340px; border-radius: 24px; padding: 28px 24px; text-align: center; box-shadow: 0 20px 40px rgba(0,0,0,0.2); font-family: inherit;">
+            
+            <!-- Icon tròn có vầng sáng -->
+            <div id="modalIconWrap" style="width: 72px; height: 72px; border-radius: 50%; margin: 0 auto 18px; display: flex; align-items: center; justify-content: center; font-size: 32px;">
+                <i id="modalIcon"></i>
+            </div>
+
+            <h3 id="modalTitle" style="margin: 0 0 10px; font-size: 19px; font-weight: 700; color: #1e293b;">Thông báo</h3>
+            <p id="modalMessage" style="margin: 0 0 24px; font-size: 14px; line-height: 1.5; color: #475569;"></p>
+
+            <button id="modalBtn" style="width: 100%; padding: 13px; border: none; border-radius: 30px; background: #2e7d32; color: #ffffff; font-size: 15px; font-weight: 600; cursor: pointer;">
+                Đồng ý
+            </button>
+        </div>
+    </div>
+
+    <script>
+    function showAppModal(isSuccess, message, onConfirm) {
+        const modal = document.getElementById('customModal');
+        const iconWrap = document.getElementById('modalIconWrap');
+        const icon = document.getElementById('modalIcon');
+        const msg = document.getElementById('modalMessage');
+        const btn = document.getElementById('modalBtn');
+
+        msg.textContent = message;
+
+        if (isSuccess) {
+            // Tích V xanh lá
+            iconWrap.style.background = 'radial-gradient(circle, rgba(34, 197, 94, 0.25) 0%, rgba(34, 197, 94, 0.05) 70%)';
+            icon.className = 'fa-solid fa-check';
+            icon.style.color = '#16a34a';
+        } else {
+            // Dấu X màu đỏ
+            iconWrap.style.background = 'radial-gradient(circle, rgba(239, 68, 68, 0.25) 0%, rgba(239, 68, 68, 0.05) 70%)';
+            icon.className = 'fa-solid fa-xmark';
+            icon.style.color = '#dc2626';
+        }
+
+        modal.style.display = 'flex';
+
+        btn.onclick = function() {
+            modal.style.display = 'none';
+            if (onConfirm) onConfirm();
+        };
+    }
+
+    // Xử lý nộp form đăng nhập
+    document.getElementById('loginForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const emailInput = document.getElementById('email').value.trim();
+        const passInput = document.getElementById('password').value;
+
+        const savedEmail = localStorage.getItem('registeredEmail');
+        const savedPass = localStorage.getItem('registeredPassword');
+        const defaultName = emailInput.includes('@') ? emailInput.split('@')[0] : emailInput;
+        const savedName = localStorage.getItem('registeredName') || defaultName;
+
+        // 1. Kiểm tra nếu chưa từng có tài khoản nào đăng ký trong máy
+        if (!savedEmail) {
+            showAppModal(false, 'Chưa có tài khoản nào được đăng ký! Vui lòng bấm Đăng ký trước.');
+            return;
+        }
+
+        // 2. Kiểm tra chính xác 100% email và mật khẩu
+        if (emailInput === savedEmail && passInput === savedPass) {
+            localStorage.setItem('isLoggedIn', 'true');
+            localStorage.setItem('currentUserName', savedName);
+            localStorage.setItem('currentUserEmail', emailInput);
+
+            showAppModal(true, 'Đăng nhập thành công! Chào mừng bạn trở lại khu vườn.', function() {
+                window.location.href = 'index.html';
+            });
+        } else {
+            showAppModal(false, 'Sai tài khoản hoặc mật khẩu! Vui lòng kiểm tra lại.');
+        }
+    });
+
+    // Xử lý bật/tắt hiển thị mật khẩu
+    const togglePassword = document.getElementById('togglePassword');
+    const passwordField = document.getElementById('password');
+
+    if (togglePassword && passwordField) {
+        togglePassword.addEventListener('click', function () {
+            const type = passwordField.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordField.setAttribute('type', type);
+            this.classList.toggle('fa-eye');
+            this.classList.toggle('fa-eye-slash');
+        });
+    }
+    </script>
 </body>
 </html>

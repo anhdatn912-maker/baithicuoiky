@@ -16,6 +16,7 @@
             <p style="color: #666; font-size: 0.9rem;">Tham gia hệ thống Quản lý Vườn Đô Thị</p>
         </div>
 
+        <!-- Bỏ action mặc định, dùng JS xử lý -->
         <form id="registerForm">
             <div class="form-group">
                 <label for="fullname">Họ và tên</label>
@@ -31,6 +32,11 @@
                 <label for="reg-password">Mật khẩu</label>
                 <input type="password" id="reg-password" placeholder="Tạo mật khẩu bảo mật..." required>
             </div>
+            
+            <div class="form-group">
+                <label for="reg-confirm-password">Xác nhận mật khẩu</label>
+                <input type="password" id="reg-confirm-password" placeholder="Nhập lại mật khẩu..." required>
+            </div>
 
             <button type="submit" class="btn-primary" style="width: 100%; justify-content: center; margin-top: 1rem; padding: 10px;">Đăng Ký Ngay</button>
             
@@ -40,7 +46,85 @@
         </form>
     </div>
 
-    <!-- Tích hợp logic xử lý vào script.js chung -->
-    <script src="script.js"></script>
+    <!-- Popup Thông Báo Hiện Đại -->
+    <div id="customModal" style="display: none; position: fixed; inset: 0; background: rgba(0, 0, 0, 0.45); z-index: 99999; align-items: center; justify-content: center;">
+        <div style="background: #ffffff; width: 90%; max-width: 340px; border-radius: 24px; padding: 28px 24px; text-align: center; box-shadow: 0 20px 40px rgba(0,0,0,0.2); font-family: inherit;">
+            
+            <!-- Icon tròn có vầng hào quang toả ra -->
+            <div id="modalIconWrap" style="width: 72px; height: 72px; border-radius: 50%; margin: 0 auto 18px; display: flex; align-items: center; justify-content: center; font-size: 32px;">
+                <i id="modalIcon"></i>
+            </div>
+
+            <h3 id="modalTitle" style="margin: 0 0 10px; font-size: 19px; font-weight: 700; color: #1e293b;">Thông báo</h3>
+            <p id="modalMessage" style="margin: 0 0 24px; font-size: 14px; line-height: 1.5; color: #475569;"></p>
+
+            <button id="modalBtn" style="width: 100%; padding: 13px; border: none; border-radius: 30px; background: #2e7d32; color: #ffffff; font-size: 15px; font-weight: 600; cursor: pointer;">
+                Đồng ý
+            </button>
+        </div>
+    </div>
+
+    <script>
+    // Hàm hiển thị Popup Modal (Tích V xanh thành công / Dấu X đỏ thất bại)
+    function showAppModal(isSuccess, message, onConfirm) {
+        const modal = document.getElementById('customModal');
+        const iconWrap = document.getElementById('modalIconWrap');
+        const icon = document.getElementById('modalIcon');
+        const msg = document.getElementById('modalMessage');
+        const btn = document.getElementById('modalBtn');
+
+        msg.textContent = message;
+
+        if (isSuccess) {
+            // Tích V xanh lá
+            iconWrap.style.background = 'radial-gradient(circle, rgba(34, 197, 94, 0.25) 0%, rgba(34, 197, 94, 0.05) 70%)';
+            icon.className = 'fa-solid fa-check';
+            icon.style.color = '#16a34a';
+        } else {
+            // Dấu X màu đỏ
+            iconWrap.style.background = 'radial-gradient(circle, rgba(239, 68, 68, 0.25) 0%, rgba(239, 68, 68, 0.05) 70%)';
+            icon.className = 'fa-solid fa-xmark';
+            icon.style.color = '#dc2626';
+        }
+
+        modal.style.display = 'flex';
+
+        btn.onclick = function() {
+            modal.style.display = 'none';
+            if (onConfirm) onConfirm();
+        };
+    }
+
+    // Xử lý nộp form đăng ký
+    document.getElementById('registerForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const name = document.getElementById('fullname').value.trim();
+        const email = document.getElementById('reg-email').value.trim();
+        const password = document.getElementById('reg-password').value;
+        const confirmPassword = document.getElementById('reg-confirm-password').value;
+
+        // 1. Kiểm tra độ dài mật khẩu tối thiểu
+        if (password.length < 6) {
+            showAppModal(false, 'Mật khẩu phải có tối thiểu 6 ký tự!');
+            return;
+        }
+
+        // 2. Kiểm tra xác nhận mật khẩu
+        if (password !== confirmPassword) {
+            showAppModal(false, 'Mật khẩu xác nhận không khớp! Vui lòng nhập lại.');
+            return;
+        }
+
+        // Lưu thông tin người dùng vào LocalStorage
+        localStorage.setItem('registeredName', name);
+        localStorage.setItem('registeredEmail', email);
+        localStorage.setItem('registeredPassword', password);
+
+        // 3. Đăng ký thành công
+        showAppModal(true, 'Đăng ký tài khoản thành công! Chào mừng bạn đến với UrbanGarden.', function() {
+            window.location.href = 'dang-nhap.html';
+        });
+    });
+    </script>
 </body>
 </html>
